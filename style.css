@@ -1,323 +1,224 @@
-/* 글로벌 변수 설정 */
 :root {
-  --bg: #0d0e15;
-  --side: #141622;
-  --surface: #1b1e30;
-  --elev: #242842;
-  --border: #2e3454;
-  --text: #f1f3f9;
-  --text-dim: #9ca5c5;
-  --text-mute: #626b93;
-  --accent: #a78bfa;
-  --accent-2: #f0abfc;
-  --user: #4f46e5;
-  --bot: #1b1e30;
+  --bg: #fafafa;            /* 깨끗하고 맑은 초경량 그레이 화이트 */
+  --card-bg: #ffffff;        /* 순백색 카드 */
+  --text-main: #222222;      /* 가독성 높고 정갈한 딥 다크 흑색 */
+  --text-sub: #767676;       /* 차분하고 부드러운 중간 톤 회색 */
+  --primary: #475569;        /* 튀지 않고 모던한 슬레이트 네이비/그레이 */
+  --primary-light: #f1f5f9;  /* 눈이 편안한 미색 배경 소프트 톤 */
+  --accent-tint: #f8f6f2;    /* 내추럴한 웜베이지 포인트 */
+  --border: #eaeaea;         /* 실선처럼 깔끔하고 얇은 테두리 */
+  --radius: 12px;            /* 과하게 동글거리지 않는 딱 정갈한 곡률 */
 }
 
-* { 
-  box-sizing: border-box; 
-  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+* {
+  box-sizing: border-box;
+  margin: 0; padding: 0;
+  /* 부드럽지만 빠르고 군더더기 없는 모션 */
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
 }
 
 body {
-  margin: 0; 
-  min-height: 100vh;
-  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Noto Sans KR', system-ui, sans-serif;
-  background: var(--bg); 
-  color: var(--text); 
-  line-height: 1.6;
+  font-family: 'Pretendard', -apple-system, system-ui, sans-serif;
+  background-color: var(--bg);
+  color: var(--text-main);
+  padding: 60px 20px;
+  display: flex;
+  justify-content: center;
+  -webkit-font-smoothing: antialiased;
 }
 
-.app {
-  display: grid; 
-  grid-template-columns: 280px 1fr;
-  height: 100vh;
+.container {
+  width: 100%;
+  max-width: 520px; /* 불필요한 좌우 여백을 줄여 컴팩트하게 배치 */
 }
 
-/* 1. 사이드바 디자인 */
-.side {
-  background: var(--side); 
-  border-right: 1px solid var(--border);
-  display: grid; 
-  grid-template-rows: auto 1fr auto;
-  padding: 24px 16px;
+/* 1. 상단 헤더 구역 */
+.app-header {
+  text-align: center;
+  margin-bottom: 32px;
 }
-.side__head { margin-bottom: 24px; }
-.brand {
-  display: flex; 
-  align-items: center; 
-  gap: 10px;
-  font-weight: 700; 
-  font-size: 1.15rem;
-  padding: 4px; 
-  margin-bottom: 20px;
-  letter-spacing: -0.02em;
-}
-.brand__mark {
-  width: 32px; 
-  height: 32px; 
-  border-radius: 10px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  color: var(--bg); 
-  display: grid; 
-  place-items: center; 
-  font-weight: 800;
-  font-size: 1.1rem;
-}
-.new-btn {
-  width: 100%; 
-  padding: 12px;
-  background: rgba(167, 139, 250, 0.1);
-  color: var(--accent); 
-  border: 1px solid rgba(167, 139, 250, 0.2); 
-  border-radius: 12px;
-  font-family: inherit; 
-  font-weight: 600; 
-  font-size: .9rem;
-  cursor: pointer;
-}
-.new-btn:hover {
-  background: rgba(167, 139, 250, 0.2);
-  color: #fff;
-}
-
-.threads {
-  display: flex; 
-  flex-direction: column; 
-  gap: 6px;
-  overflow-y: auto; 
-  padding: 8px 0;
-}
-.thread {
-  display: block; 
-  padding: 11px 14px;
-  background: transparent; 
-  border: 0; 
-  text-align: left;
-  border-radius: 10px; 
-  color: var(--text-dim);
-  font-family: inherit; 
-  font-size: .88rem; 
-  cursor: pointer;
-  white-space: nowrap; 
-  overflow: hidden; 
-  text-overflow: ellipsis;
-}
-.thread:hover { 
-  background: var(--surface); 
-  color: var(--text); 
-}
-
-.side__foot { padding-top: 14px; }
-
-/* 2. 메인 우측 대화창 공간 */
-.main {
-  display: grid; 
-  grid-template-rows: auto 1fr auto;
-  background: var(--bg);
-  min-width: 0;
-}
-.topbar {
-  padding: 18px 32px; 
-  border-bottom: 1px solid var(--border);
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center;
-  background: rgba(13, 14, 21, 0.8);
-  backdrop-filter: blur(10px);
-}
-.topbar h1 { margin: 0; font-size: 1.05rem; font-weight: 600; }
-.topbar__chips { display: flex; gap: 8px; }
-.chip {
-  background: var(--surface); 
-  border: 1px solid var(--border);
-  color: var(--text-dim); 
-  padding: 5px 12px; 
-  border-radius: 999px;
-  font-size: .75rem;
-}
-.chip--ok { 
-  color: #4ade80; 
-  background: rgba(74, 222, 128, 0.05);
-  border-color: rgba(74, 222, 128, 0.2);
-}
-
-.chat {
-  overflow-y: auto; 
-  padding: 40px 32px;
-  display: flex; 
-  flex-direction: column; 
-  gap: 24px;
-}
-
-/* 3. 웰컴 초기 화면 대폭 개선 */
-.welcome {
-  text-align: center; 
-  margin: auto;
-  max-width: 500px;
-  padding: 40px 20px;
-}
-.welcome__logo {
-  width: 72px; 
-  height: 72px; 
-  border-radius: 24px; 
-  margin: 0 auto 24px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  display: grid; 
-  place-items: center; 
-  font-size: 2.2rem;
-  box-shadow: 0 8px 24px rgba(167, 139, 250, 0.3);
-}
-.welcome h2 {
-  margin: 0 0 12px; 
-  font-size: 1.6rem; 
+.logo {
+  font-size: 1.6rem;
   font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 6px;
   letter-spacing: -0.03em;
 }
+.subtitle {
+  font-size: 0.9rem;
+  color: var(--text-sub);
+  font-weight: 400;
+}
 
-/* 4. 필터 구역 디자인 (밋밋함 탈출 핵심) */
-.filter-zone {
-  background: var(--side);
-  border-top: 1px solid var(--border);
-  padding: 28px 32px;
+/* 메인 프레임 */
+.app-main {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  box-shadow: 0 -10px 30px rgba(0,0,0,0.2);
 }
-.filter-group {
+
+/* 2. 상단 추천 결과창 구역 */
+.result-section {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  min-height: 140px;
   display: flex;
-  flex-direction: column; /* 세로 배열로 바꿔서 여백과 안정감 확보 */
-  gap: 10px;
+  align-items: center;
+  justify-content: center;
 }
-.filter-label {
-  font-size: 0.85rem;
-  color: var(--text-dim);
+
+/* 결과 대기 중 화면 */
+.welcome {
+  text-align: center;
+  width: 100%;
+}
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  background: var(--primary-light);
+  color: var(--primary);
+  font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  padding-left: 4px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  letter-spacing: 0.04em;
 }
+.welcome h2 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 6px;
+}
+.welcome p {
+  color: var(--text-sub);
+  font-size: 0.88rem;
+}
+
+/* 결과 메시지 노출 앤 애니메이션 */
+.msg {
+  width: 100%;
+  animation: fadeIn 0.25s ease-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 유저 선택 요약 바 */
+.msg--user {
+  background: var(--bg);
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: var(--text-sub);
+  margin-bottom: 14px;
+  text-align: center;
+  border: 1px solid var(--border);
+}
+.msg--user .msg__avatar { display: none; }
+
+/* 진짜 큐레이팅 결과 (깔끔한 모노톤의 박스) */
+.msg--bot {
+  background: var(--accent-tint);
+  border: 1px solid #e1ded7;
+  padding: 20px;
+  border-radius: 8px;
+  color: #443f3b;
+  font-size: 0.98rem;
+  font-weight: 500;
+  line-height: 1.6;
+  text-align: center;
+}
+.msg--bot .msg__avatar { display: none; }
+
+
+/* 3. 하단 취향 필터 카드 */
+.filter-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+}
+.filter-card h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: var(--text-main);
+}
+
+.filter-group {
+  margin-bottom: 20px;
+}
+.group-title {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 10px;
+}
+
 .chip-container {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
-/* 개별 선택 칩 (카드 버튼 스타일) */
+/* 4. 깔끔하고 미니멀한 버튼 (칩) */
 .option-chip {
-  background: var(--surface);
+  background: #ffffff;
   border: 1px solid var(--border);
-  color: var(--text-dim);
-  padding: 12px 20px;
-  border-radius: 14px;
+  color: var(--text-sub);
+  padding: 10px 16px;
+  border-radius: 8px; /* 너무 둥글지 않게 모던한 사각 라운딩 */
   font-family: inherit;
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   font-weight: 500;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 .option-chip:hover {
-  border-color: var(--text-dim);
-  color: var(--text);
-  transform: translateY(-2px); /* 살짝 떠오르는 효과 */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-/* 칩 클릭되어 선택됐을 때 효과 극대화 */
-.option-chip.is-selected {
-  background: linear-gradient(135deg, rgba(167, 139, 250, 0.15), rgba(240, 171, 252, 0.15));
-  border-color: var(--accent);
-  color: #fff;
-  font-weight: 600;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(167, 139, 250, 0.25);
+  border-color: #b5b5b5;
+  color: var(--text-main);
+  background-color: var(--bg);
 }
 
-/* 5. 최종 추천 실행 버튼 */
-.submit-recommend-btn {
+/* 칩이 클릭되어 활성화되었을 때 (눈 피로감이 전혀 없는 슬레이트 차콜) */
+.option-chip.is-selected {
+  background-color: #334155;
+  border-color: #334155;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* 5. 메뉴 추천받기 실행 버튼 */
+.submit-btn {
   width: 100%;
-  padding: 16px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  color: var(--bg);
-  border: 0;
-  border-radius: 14px;
+  padding: 14px;
+  background: #1e293b; /* 무게감 있고 단정한 딥 차콜 그레이 */
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
   font-family: inherit;
-  font-weight: 700;
-  font-size: 1.05rem;
+  font-weight: 600;
+  font-size: 0.98rem;
   cursor: pointer;
-  margin-top: 10px;
-  box-shadow: 0 6px 20px rgba(167, 139, 250, 0.2);
+  margin-top: 8px;
 }
-.submit-recommend-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(167, 139, 250, 0.3);
+.submit-btn:hover {
+  background: #0f172a;
 }
-.submit-recommend-btn:active {
+.submit-btn:active {
   transform: translateY(1px);
 }
 
-/* 6. 대화창 말풍선 디자인 */
-.msg { 
-  display: flex; 
-  gap: 16px; 
-  max-width: 800px; 
-  animation: fadeIn 0.3s ease-out;
-}
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.msg__avatar {
-  width: 36px; 
-  height: 36px; 
-  border-radius: 50%;
-  display: grid; 
-  place-items: center; 
-  font-weight: 700; 
-  font-size: .85rem;
-  flex-shrink: 0;
-}
-.msg--user { align-self: flex-end; flex-direction: row-reverse; }
-.msg--user .msg__bubble {
-  background: var(--user); 
-  color: #fff; 
-  border-bottom-right-radius: 4px;
-  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
-}
-.msg--user .msg__avatar { background: var(--user); color: #fff; }
-
-.msg--bot .msg__bubble {
-  background: var(--bot); 
-  border: 1px solid var(--border);
-  border-bottom-left-radius: 4px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-.msg--bot .msg__avatar {
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  color: var(--bg);
-}
-.msg__bubble {
-  padding: 14px 20px; 
-  border-radius: 16px;
-  font-size: .95rem; 
-  line-height: 1.6;
-  white-space: pre-wrap; 
-  word-break: break-word;
-}
-
-/* 타이핑 애니메이션 점 점 점 */
-.typing { display: flex; gap: 4px; padding: 6px 4px; }
+/* 대기 로딩 애니메이션 도트 */
+.typing { display: flex; gap: 6px; justify-content: center; width: 100%; }
 .typing span {
   width: 6px; height: 6px; border-radius: 50%;
-  background: var(--text-mute);
-  animation: blink 1.2s infinite;
+  background: var(--primary);
+  animation: wave 1s infinite ease-in-out alternate;
 }
-.typing span:nth-child(2) { animation-delay: .2s; }
-.typing span:nth-child(3) { animation-delay: .4s; }
-@keyframes blink { 0%, 80%, 100% { opacity: .3 } 40% { opacity: 1 } }
-
-@media (max-width: 720px) {
-  .app { grid-template-columns: 1fr; }
-  .side { display: none; }
-  .filter-zone { padding: 20px; }
-}
+.typing span:nth-child(2) { animation-delay: 0.2s; }
+.typing span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes wave { from { opacity: 0.3; transform: scale(0.8); } to { opacity: 1; transform: scale(1.2); } }
