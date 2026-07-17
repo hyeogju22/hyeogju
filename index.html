@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nova — Food AI</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="side">
+      <header class="side__head">
+        <div class="brand">
+          <span class="brand__mark">N</span> Nova Food
+        </div>
+        <button type="button" class="new-btn" id="newChat">+ 새 추천</button>
+      </header>
+      <nav class="threads" id="threads">
+        <!-- 동적 탐색 기록 -->
+      </nav>
+      <footer class="side__foot">
+        <div class="me">
+          <div class="me__avatar">JL</div>
+          <div>
+            <strong>이지수</strong>
+            <span>Foodie 플랜</span>
+          </div>
+        </div>
+      </footer>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <h1 id="threadTitle">메뉴 큐레이팅</h1>
+        <div class="topbar__chips">
+          <span class="chip">Nova-v2</span>
+          <span class="chip chip--ok">● 추천 엔진 작동중</span>
+        </div>
+      </header>
+
+      <div class="chat" id="chat">
+        <div class="welcome" id="welcomeScreen">
+          <div class="welcome__logo">🍳</div>
+          <h2>오늘 어떤 음식을 드시고 싶으신가요?</h2>
+          <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 20px;">아래의 조건들을 터치하여 고른 뒤 추천받기 버튼을 눌러보세요!</p>
+        </div>
+      </div>
+
+      <!-- 옵션 선택 폼 구역 -->
+      <div class="filter-zone">
+        <!-- 1. 시간대 선택 -->
+        <div class="filter-group">
+          <span class="filter-label">언제</span>
+          <div class="chip-container" data-category="time">
+            <button type="button" class="option-chip" data-value="아침">🌅 아침</button>
+            <button type="button" class="option-chip" data-value="점심">☀️ 점심</button>
+            <button type="button" class="option-chip" data-value="저녁">🌙 저녁</button>
+          </div>
+        </div>
+
+        <!-- 2. 메뉴 종류 선택 -->
+        <div class="filter-group">
+          <span class="filter-label">종류</span>
+          <div class="chip-container" data-category="type">
+            <button type="button" class="option-chip" data-value="한식">🇰🇷 한식</button>
+            <button type="button" class="option-chip" data-value="일식">🇯🇵 일식/중식</button>
+            <button type="button" class="option-chip" data-value="양식">🇺🇸 양식/패스트푸드</button>
+            <button type="button" class="option-chip" data-value="디저트">🍰 디저트/가벼운 식사</button>
+          </div>
+        </div>
+
+        <!-- 3. 맛 스타일 선택 -->
+        <div class="filter-group">
+          <span class="filter-label">스타일</span>
+          <div class="chip-container" data-category="flavor">
+            <button type="button" class="option-chip" data-value="매콤/자극적">🔥 매콤칼칼</button>
+            <button type="button" class="option-chip" data-value="담백/든든">🍚 담백든든</button>
+            <button type="button" class="option-chip" data-value="상큼/달달">🍓 상큼달달</button>
+          </div>
+        </div>
+
+        <!-- 실행 버튼 -->
+        <button type="button" class="submit-recommend-btn" id="recommendBtn">
+          ✨ 조건에 맞는 메뉴 추천받기
+        </button>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
