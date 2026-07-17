@@ -1,0 +1,65 @@
+/* 선택형 필터 존 디자인 */
+.filter-zone {
+  background: var(--side);
+  border-top: 1px solid var(--border);
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.filter-label {
+  font-size: 0.85rem;
+  color: var(--text-mute);
+  font-weight: 600;
+  width: 50px;
+  flex-shrink: 0;
+}
+.chip-container {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.option-chip {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-family: inherit;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.option-chip:hover {
+  border-color: var(--text-mute);
+  color: var(--text);
+}
+/* 버튼이 체크되었을 때 스타일 */
+.option-chip.is-selected {
+  background: rgba(167, 139, 250, 0.15);
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+}
+.submit-recommend-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: var(--bg);
+  border: 0;
+  border-radius: 12px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: transform 0.1s ease;
+}
+.submit-recommend-btn:active {
+  transform: scale(0.99);
+}
